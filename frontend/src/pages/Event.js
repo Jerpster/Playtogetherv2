@@ -33,13 +33,11 @@ function CreateEvent() {
         eventDate.setHours(eventTime.getHours());
         eventDate.setMinutes(eventTime.getMinutes());
 
-        await axios.post('http://localhost:4000/events', { name, date: eventDate });
+        await axios.post('http://localhost:4000/events', { name, date: eventDate, time }); 
         setError('Event created successfully.');
 
-        
         fetchEvents();
 
-        
         setName('');
         setDate('');
         setTime('');
@@ -57,7 +55,6 @@ function CreateEvent() {
       await axios.post(`http://localhost:4000/events/${eventId}/signup`, { name: participantName });
       setError('Signed up for event successfully.');
 
-      
       fetchEvents();
     } catch (error) {
       setError('Failed to sign up for event.');
@@ -69,7 +66,6 @@ function CreateEvent() {
       await axios.delete(`http://localhost:4000/events/${eventId}`);
       setError('Event deleted successfully.');
 
-      
       fetchEvents();
     } catch (error) {
       setError('Failed to delete event.');
@@ -116,6 +112,7 @@ function CreateEvent() {
 }
 
 export default CreateEvent;
+
 
 
 
