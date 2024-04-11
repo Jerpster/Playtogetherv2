@@ -23,21 +23,19 @@ function CreateEvent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!name || !date || !time) {
       setError('Please fill in all fields.');
     } else {
       try {
-        const eventDate = new Date(date);
-        const eventTime = new Date(time);
-        eventDate.setHours(eventTime.getHours());
-        eventDate.setMinutes(eventTime.getMinutes());
-
-        await axios.post('http://localhost:4000/events', { name, date: eventDate, time }); 
+        
+        const eventDateTime = new Date(`${date}T${time}`);
+  
+        await axios.post('http://localhost:4000/events', { name, date: eventDateTime, time: eventDateTime }); 
         setError('Event created successfully.');
-
+  
         fetchEvents();
-
+  
         setName('');
         setDate('');
         setTime('');
@@ -46,6 +44,10 @@ function CreateEvent() {
       }
     }
   };
+  
+  
+  
+  
 
   const handleSignup = async (eventId) => {
     try {
